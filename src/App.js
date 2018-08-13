@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './App.css'
 import WorldMap from './WorldMap'
+import BarChart from './BarChart'
+import Vchart from './Vchart'
 import worlddata from './worlddata.js'
 import { range, sum } from 'd3-array'
 import { scaleThreshold } from 'd3-scale'
@@ -24,10 +26,13 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>mapzzz</h2>
+          <h2>Rendering d3 examples with React!
+          </h2>
         </div>
         <div>
-          <WorldMap colorScale={colorScale} data={appdata} size={[500, 400]} />
+            <WorldMap colorScale={colorScale} data={appdata} size={[800, 600]} />
+            <BarChart data={[10, 20, 40, 50, 65, 80]} size={[30, 200]} />
+            <Vchart />
         </div>
         </div>
       )
@@ -35,3 +40,4 @@ class App extends Component {
 }
 
 export default App
+
