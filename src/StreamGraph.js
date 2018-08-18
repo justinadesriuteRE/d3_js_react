@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-import { stack, area, curveBasis, stackOrderInsideOut, stackOffsetSilhouette } from 'd3-shape'
+import { stack, area, curveBasis, stackOrderInsideOut, stackOffsetWiggle } from 'd3-shape'
 import { range } from 'd3-array'
 import { scaleLinear } from 'd3-scale'
 
@@ -19,7 +19,7 @@ class StreamGraph extends Component {
       .range([this.props.size[1], 0])
 
     const stackLayout = stack()
-      .offset(stackOffsetSilhouette)
+      .offset(stackOffsetWiggle)
       .order(stackOrderInsideOut)
       .keys(Object.keys(stackData[0]))
 
@@ -32,7 +32,8 @@ class StreamGraph extends Component {
     const stacks = stackLayout(stackData).map((d, i) => <path
         key={"stack" + i}
         d={stackArea(d)}
-        style={{fill: this.props.colorScale(this.props.data[i].launchday), stroke: "black", strokeOpacity: 0.5 }}
+        onMouseEnter={() => {this.props.onHover(this.props.data[i])}}
+        style={{fill: this.props.hoverElement === this.props.data[i]["id"] ? "#FCBC34" : this.props.colorScale(this.props.data[i].launchday), stroke: "black", strokeOpacity: 0.5 }}
       />)
 
     return <svg width={this.props.size[0]} height={this.props.size[1]}>
